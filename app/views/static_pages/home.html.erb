@@ -13,7 +13,7 @@
 <% @surveys.each do |survey| %>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-      <h3><%= survey.title %></h3>
+      <h3><%= link_to survey.title, survey_path(survey.id) %></h3>
       <p><%= survey.description %></p>
     </div>
   </div>

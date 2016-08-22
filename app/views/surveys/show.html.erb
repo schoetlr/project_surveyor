@@ -1,2 +1,46 @@
-<h1>Surveys#show</h1>
-<p>Find me in app/views/surveys/show.html.erb</p>
+<% if flash[:success] %>
+  <div class="row">
+    <div class="col-xs-12 alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  </div>
+<% elsif flash[:error] %>
+  <div class="row">
+    <div class="col-xs-12 alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @survey.title %></h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @survey.description %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% @questions.each.with_index(1) do |question, index| %>
+      <h4><%= "#{index}. #{question.query}" %></h4>
+        
+        <% question.options.each.with_index(1) do |option, index| %>
+          <p><%= "#{index}. #{option.text}" %></p>
+        <% end %>
+
+        <p><%= link_to "Delete Question", survey_question_path(@survey, question.id), method: "DELETE" %></p>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row">
+  <%= link_to "New Question", set_up_survey_questions_path(@survey), class: "btn btn-primary col-xs-6" %>
+</div>

@@ -1,0 +1,46 @@
+<div class="row">
+  <% unless flash[:error].nil? %>
+    <div class="alert alert-danger col-xs-12">
+      <%= flash[:error] %>
+      <%= @question.errors.map {|k, v| "#{k}, #{v}"} %>
+    </div>
+  <% end %>
+</div>
+
+
+<%= render :partial => 'survey_info', locals: {survey: @survey} %>
+
+<%= form_for [@survey, @question], html: {class: "form-horizontal col-xs-8"} do |question_fields| %>
+
+  <div class="form-group">
+      <%= question_fields.label :query, "What is your question?" %><br/>
+      <%= question_fields.text_field :query %>
+      
+      <%= question_fields.hidden_field :survey_id, value: @question.survey_id %>
+
+      <%= question_fields.hidden_field :required, value: @question.required %>
+
+      <%= question_fields.hidden_field :answer_count, value: @question.answer_count %>
+  </div>
+
+
+  <%= question_fields.fields_for :options do |option_fields| %>
+    <%= option_fields.label :text, "Option" %><br/>
+    <%= option_fields.text_area :text %><br/>
+
+
+    <%#= option_fields.label :_destroy, "Destroy this option?" %>
+    <%#= option_fields.check_box :_destroy %><br/>
+
+  <% end %>
+
+  <%= question_fields.submit class: "btn btn-primary col-xs-6" %>
+
+
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Back to Previous Step", set_up_survey_questions_path(@survey) %>
+  </div>
+</div>
