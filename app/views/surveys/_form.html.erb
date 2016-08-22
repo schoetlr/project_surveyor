@@ -1,0 +1,32 @@
+<div class="row">
+  <% unless flash[:error].nil? %>
+    <div class="alert alert-danger col-xs-12">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">  
+  <%= form_for @survey, html: {class: "form-horizontal col-xs-8 col-xs-offset-2"} do |survey_fields| %>
+
+    <div class="form-group">
+      <%= survey_fields.label :title, class: "col-xs-4" %>
+      <div class="col-xs-8">
+        <%= survey_fields.text_field :title %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= survey_fields.label :description, class: "col-xs-4" %>
+      <div class="col-xs-8">
+        <%= survey_fields.text_area :description, size:'40x6' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= survey_fields.submit class: "btn btn-success col-xs-4 col-xs-offset-4", id: "survey-submit" %>
+    </div>
+
+
+  <% end %>
+</div>

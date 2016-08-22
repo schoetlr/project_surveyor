@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 id="home-heading">Surveyer Application</h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <%= link_to "Create Survey", new_survey_path, class: "btn btn-primary col-xs-8 col-xs-offset-2" %>
+</div>
+
+
+<% @surveys.each do |survey| %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h3><%= survey.title %></h3>
+      <p><%= survey.description %></p>
+    </div>
+  </div>
+
+<% end %>
