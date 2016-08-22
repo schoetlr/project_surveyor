@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   
-  resources :surveys
+  get 'questions/set_up'
+
+  resources :surveys do 
+    resources :questions do
+      get 'set_up', :on => :collection
+    end
+  end
 
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

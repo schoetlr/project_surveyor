@@ -8,7 +8,8 @@ class SurveysController < ApplicationController
     @survey = Survey.new(whitelisted_params)
     if @survey.save
       flash[:success] = "Survey successfully created"
-      redirect_to root_path
+      #redirect to question set up(choose how many options, if required etc)
+      redirect_to set_up_survey_questions_path(@survey)
     else
       flash[:error] = "Something went wrong"
       render :new
