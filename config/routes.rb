@@ -2,11 +2,14 @@ Rails.application.routes.draw do
   
   get 'questions/set_up'
 
-  resources :surveys do 
+  resources :surveys do
+    get ':id/results', :on => :collection, action: 'results', as: 'results' 
     resources :questions do
       get 'set_up', :on => :collection
     end
   end
+
+  resources :answers, only: [:create]
 
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

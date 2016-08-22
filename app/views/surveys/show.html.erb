@@ -22,25 +22,29 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <h1><%= @survey.description %></h1>
+    <h2><%= @survey.description %></h2>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <% @questions.each.with_index(1) do |question, index| %>
-      <h4><%= "#{index}. #{question.query}" %></h4>
-        
-        <% question.options.each.with_index(1) do |option, index| %>
-          <p><%= "#{index}. #{option.text}" %></p>
-        <% end %>
-
-        <p><%= link_to "Delete Question", survey_question_path(@survey, question.id), method: "DELETE" %></p>
+<div id="survey">
+  <h1>Questions:</h1>
+  <%= form_tag(answers_path, method: :post) do %>
+    <% @survey.questions.each.with_index(1) do |question, index| %>
+      <% name = "question_#{index}".to_sym %>
+      <h4><%= label_tag name, question.query %></h4><br/>
+      <%= hidden_field_tag "#{name}_id", question.id %>
+      <% question.options.each do |option| %>
+        <%= radio_button_tag name, option.id %><%= option.text %><br/>
+      <% end %>
     <% end %>
-  </div>
+    
+    <%= hidden_field_tag :question_count, @survey.questions.count %>
+    
+    <%= submit_tag "Submit", class: "btn btn-primary col-xs-6" %>
+
+  <% end %>
 </div>
 
 
-<div class="row">
-  <%= link_to "New Question", set_up_survey_questions_path(@survey), class: "btn btn-primary col-xs-6" %>
-</div>
+
+

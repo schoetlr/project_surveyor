@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @survey.title %></h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2><%= @survey.description %></h2>
+  </div>
+</div>
+
+
+<div class="row">
+  <table class="table table-bordered">
+    <% @survey.questions.each do |question| %>
+      
+    <tr>
+      <th><%= question.query %></th>
+    </tr>
+    
+      <% question.options.each do |option| %>
+      <tr>
+        <td><%= option.text %></td>
+        <td><%= option.answers.size %></td>
+      </tr>
+      <% end %>
+    <% end %>
+
+  </table>
+</div>

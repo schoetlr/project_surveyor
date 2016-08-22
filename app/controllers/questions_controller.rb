@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(whitelisted_params)
     if @question.save
       flash[:success] = "Question successfully saved"
-      redirect_to survey_path(@question.survey_id)
+      redirect_to survey_questions_path(@survey)
     else
       flash[:error] = "Something went wrong"
       render :new
@@ -34,6 +34,11 @@ class QuestionsController < ApplicationController
       flash[:error] = "Something went wrong"
       redirect_to :back
     end
+  end
+
+  def index
+    @survey = Survey.find(params[:survey_id])
+    @questions = @survey.questions
   end
 
 

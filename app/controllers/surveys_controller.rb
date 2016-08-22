@@ -21,6 +21,10 @@ class SurveysController < ApplicationController
     @questions = @survey.questions
   end
 
+  def results
+    @survey = Survey.find(params[:id])
+  end
+
   def index
   end
 
