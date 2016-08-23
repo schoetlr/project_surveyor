@@ -13,6 +13,12 @@
 
 
 <div class="row">
+  <div class="col-xs-12">
+    <h5><%= link_to "Add Question", set_up_survey_questions_path(@survey) %></h5>
+  </div>
+</div>
+
+<div class="row">
   
     <% @survey.questions.each.with_index(1) do |question, index| %>
       
