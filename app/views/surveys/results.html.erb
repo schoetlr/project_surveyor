@@ -7,26 +7,36 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <h2><%= @survey.description %></h2>
+    <p><%= @survey.description %></p>
   </div>
 </div>
 
 
 <div class="row">
-  <table class="table table-bordered">
-    <% @survey.questions.each do |question| %>
+  
+    <% @survey.questions.each.with_index(1) do |question, index| %>
       
-    <tr>
-      <th><%= question.query %></th>
-    </tr>
     
-      <% question.options.each do |option| %>
-      <tr>
-        <td><%= option.text %></td>
-        <td><%= option.answers.size %></td>
-      </tr>
-      <% end %>
-    <% end %>
+      
+      <table class="table table-bordered table-striped col-xs-12">
+        <h4 class="text-primary"><%= "#{index}. #{question.query}" %></h4>
+        <tr>
+          <th>Response</th>
+          <th>Count</th>
+        </tr>
+        <% question.options.each do |option| %>
+        <tr>
+          <td><%= option.text %></td>
+          <td><%= option.answers.size %></td>
+        </tr>
+        <% end %>
+      </table>
 
-  </table>
+    <% end %><!-- end question iteration -->
+
+  
 </div>
+
+
+
+
