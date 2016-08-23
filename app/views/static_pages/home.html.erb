@@ -12,13 +12,16 @@
 
 <% @surveys.each do |survey| %>
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-2">
+    <div class="col-xs-5 col-xs-offset-2">
       <h3><%= link_to survey.title, survey_path(survey.id) %></h3>
       <p><%= survey.description %></p>
       <p><%= "Responses: #{survey.response_count}" %></p>
     </div>
+    <div class="col-xs-2">
+      <h5><%= link_to "Add Question", set_up_survey_questions_path(survey.id) %></h5>
+    </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <h5><%= link_to "Survey Results", results_surveys_path(survey.id) %></h5>
     </div>
   </div>
